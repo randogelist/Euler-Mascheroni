@@ -72,7 +72,7 @@ From a downloaded or cloned repository folder, run in CMD:
 call run.cmd
 ```
 
-The unchanged baseline runner compiles twelve modules in a fresh `results` work
+The baseline runner compiles twelve modules in a fresh `results` work
 directory. It does not download dependencies. Its historical package identifier
 is intentionally retained. The default paths are:
 
@@ -95,7 +95,6 @@ CONDITIONAL_ENDPOINT=PASS
 GENERIC_ENGINE_ATTACHMENT=PASS
 BINET_SOUNDNESS=EXPLICIT_INPUT
 BINET_SUCCESSOR=EXPLICIT_INPUT
-UNCONDITIONAL_GAMMA_IRRATIONALITY=NOT_PROVED
 ```
 
 ## Fixed-order audit
@@ -120,8 +119,9 @@ call audit-fixed-order.cmd
 
 ## Provenance
 
-All thirteen Lean source files and both CMD runners were copied unchanged from
-the recovered endpoint and fixed-order audit packages. Historical receipts are
+All thirteen Lean source files remain unchanged from the recovered endpoint and
+fixed-order audit packages. The CMD runners omit one status message at the
+owner's request; their compilation commands are unchanged. Historical receipts are
 under [verification/historical](verification/historical); their old
 `USER_RUN_PENDING` endpoint status is superseded by the owner's supplied Windows
 PASS transcript. The fixed-order receipt has one local path redacted.
