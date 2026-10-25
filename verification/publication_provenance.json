@@ -1,0 +1,43 @@
+{
+  "schema": "gamma-source-publication-v1",
+  "preparation_date": "2026-10-25",
+  "repository": "randogelist/Euler-Mascheroni",
+  "lean_compilation_this_task": "NOT_PERFORMED_PER_USER_INSTRUCTION",
+  "source_archives": [
+    {
+      "name": "GAMMA_FIXED_ORDER_AUDIT_v0_1_0.zip",
+      "sha256": "1ee1de4bd9d303d3eb4d676149ff3204814f6fd6bee172f0af7b376806e466ff"
+    },
+    {
+      "name": "GAMMA_TARGET622_ENDPOINT_v0_2_0.zip",
+      "sha256": "410423d18fb821750d91d899058965225ede87c0c1719f83fa33a9274c418434"
+    }
+  ],
+  "lean_sources": "Byte-identical to recovered source archives",
+  "runners": {
+    "run.cmd": "GAMMA_TARGET622_ENDPOINT_v0_2_0/run.cmd (unchanged; 12 modules)",
+    "audit-fixed-order.cmd": "GAMMA_FIXED_ORDER_AUDIT_v0_1_0/run.cmd (unchanged; 13 modules)"
+  },
+  "endpoint_native_windows_validation": {
+    "evidence": "User-supplied successful terminal transcript in conversation; not a new run",
+    "reported_status": [
+      "LEAN_REPLAY=PASS",
+      "FINITE_ADMISSION=PASS",
+      "CONDITIONAL_ENDPOINT=PASS",
+      "GENERIC_ENGINE_ATTACHMENT=PASS"
+    ],
+    "audited_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "fixed_order_validation": "Historical package receipts only; not recompiled here",
+  "remaining_endpoint_inputs": [
+    "GammaBinetBoundsSound",
+    "GammaBinetSuccessor"
+  ],
+  "full_no_successor_theorem": "On-paper argument only; not a Lean theorem in this repository",
+  "unconditional_gamma_irrationality": "NOT_PROVED",
+  "mathlib_revision": "Not recorded in recovered packages; existing compatible cache required"
+}

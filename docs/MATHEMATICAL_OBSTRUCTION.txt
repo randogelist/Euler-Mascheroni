@@ -1,0 +1,258 @@
+GAMMA TARGET-622: FIXED-ORDER CHECKER OBSTRUCTION
+
+STATUS: NOT YET LEAN FORMALIZED.
+This is a self-contained mathematical argument, with exact rational finite
+computations. It is not a claim of a new Lean theorem and is not a claim that
+gamma is rational. No prime number theorem is used.
+
+Source definitions inspected:
+GAMMA_TARGET622_ENDPOINT_v0_2_0/GammaAdmission/AcceleratedBinet.lean
+GAMMA_TARGET622_ENDPOINT_v0_2_0/GammaAdmission/AcceleratedAdmission.lean
+GAMMA_TARGET622_ENDPOINT_v0_2_0/GammaAdmission/Coordinates.lean
+
+CLAIM
+The current checker admits only bounded target values. Therefore an accepted
+seed together with a GammaBinetSuccessor is impossible. This obstruction does
+not require GammaBinetBoundsSound and does not depend on gamma's arithmetic
+nature. A known accepted seed is needed to infer that the global successor
+structure is uninhabited; without a seed, its preservation law could be vacuous.
+
+ASSUMPTIONS TAKEN FROM THE ACTUAL CHECKER
+The finite coefficient list consists of integers c_1,...,c_X. It has positive
+sum A, so at least one coefficient is nonzero. The harmonic readout is the
+integer B:
+    sum_i c_i H_(2^i-1) = B in Z.
+The correction order satisfies 0 <= p <= 6. Write m=p+1, so 1 <= m <= 7.
+The remainder radius is
+    r = beta_m sum_i |c_i| / 4^(i*m),
+with
+    beta_1=1/12, beta_2=1/120, beta_3=1/252, beta_4=1/240,
+    beta_5=1/132, beta_6=691/32760, beta_7=1/12.
+The center is some rational c, and lower=c-r, upper=c+r. A passing packet
+with target N satisfies either
+    0 < c-r and c+r < 1/(N+1),
+or
+    c+r < 0 and -(c-r) < 1/(N+1).
+Both cases imply
+    2r < 1/(N+1) <= 1.                         (1)
+Other checker conditions can only reduce the admitted set and are not needed
+in this argument.
+
+1. EFFECTIVE SUPPORT AND PRIME DIVISIBILITY
+Let L be the largest index with c_L != 0. Padded trailing zeros do not change L.
+For L >= 2, put n=2^(L-1). For each prime q with n<q<2n, the term 1/q appears
+exactly once in H_(2n-1). Every other term there has denominator prime to q,
+because 2q>2n. Every term in each earlier H_(2^i-1), i<L, likewise has
+denominator prime to q.
+
+Since the entire weighted harmonic readout is an integer, multiplying by a
+common denominator prime to q and then by q, and reducing modulo q, gives
+    q divides c_L.
+The primes are distinct, so their product divides c_L. Thus
+    |c_L| >= P_L,
+where
+    P_L = product of primes q satisfying 2^(L-1)<q<2^L.
+For L=1 this is an empty product, P_1=1, and |c_1|>=1 suffices. In particular,
+the prime 2 is NOT included in P_1. For L>=2, replacing the upper strict
+endpoint by <=2^L makes no difference because 2^L is composite.
+
+2. A UNIFORM RADIUS LOWER BOUND
+All seven beta values are >=1/252. Since m<=7,
+    r >= P_L/(252*4^(7L)).                     (2)
+In particular, even without divisibility,
+    r >= 1/(252*4^(7L)).                       (3)
+
+3. ELEMENTARY PRIMORIAL BOUND
+Let Q(t)=product of all primes q<=t. For integer t>=1,
+    Q(t) <= 4^t.
+A strong induction proves this. For t=2a, all primes a<q<=2a divide
+binomial(2a,a), so
+    Q(2a) <= Q(a)*binomial(2a,a) <= 4^a*2^(2a)=4^(2a).
+For t=2a+1, all primes a+1<q<=2a+1 divide binomial(2a+1,a), so
+    Q(2a+1) <= Q(a+1)*binomial(2a+1,a)
+              <= 4^(a+1)*2^(2a)=4^(2a+1).
+Here binomial(2a+1,a)<=2^(2a), because the two equal central terms together
+are at most the sum 2^(2a+1). The cases t=1,2 start the induction.
+For real t, applying the integer estimate at floor(t) gives Q(t)<=4^t.
+
+4. ELEMENTARY DYADIC PRIME-PRODUCT LOWER BOUND
+For n>=5, set C=binomial(2n,n). Since C is a largest binomial coefficient,
+    C >= 4^n/(2n+1).
+For every prime q, Legendre's formula gives
+    v_q(C)=sum_{k>=1}(floor(2n/q^k)-2 floor(n/q^k)).
+Every summand is 0 or 1, so q^(v_q(C))<=2n.
+Consequently, the product of prime-power factors with q<=sqrt(2n) is at most
+    (2n)^sqrt(2n).
+For q>sqrt(2n), the exponent is at most 1. Primes with 2n/3<q<=n have
+exponent zero: the two floors are 2 and 1. All remaining factors with q<=n
+are bounded by Q(2n/3)<=4^(2n/3). The factors q>n give precisely the shell
+product. Thus
+    C <= (2n)^sqrt(2n) * 4^(2n/3) * product_(n<q<=2n) q,
+and hence
+    product_(n<q<=2n) q
+      >= 4^(n/3) / ((2n+1)*(2n)^sqrt(2n)).       (4)
+The restriction n>=5 ensures sqrt(2n)<=2n/3, so these ranges cover the
+factors as stated.
+
+5. ALL EFFECTIVE SUPPORTS L>=12 ARE IMPOSSIBLE
+Substitute n=2^(L-1) into (4), use sqrt(2^L)<=2^ceil(L/2), and use
+2^L+1<=2^(L+1). This gives
+    P_L >= 2^(2^L/3 - L*2^ceil(L/2) - L - 1).
+Define
+    G(L)=2^L/3 - L*2^ceil(L/2) - 15L - 8.
+Direct exact arithmetic gives
+    G(12)=1228/3 >0,
+    G(13)=2591/3 >0.
+Also
+    G(L+2)-4G(L)
+      = (2L-4)*2^ceil(L/2) + 45L-6 >0 for L>=2.
+Two inductions, on even and odd L, therefore prove G(L)>=0 for all L>=12.
+It follows that
+    P_L >= 2^(14L+7) > 126*4^(7L).
+Combining with (2) gives r>1/2, contradicting (1). Consequently every passing
+packet has
+    L <= 11.                                  (5)
+
+6. BASE UNIVERSAL TARGET BOUND, WITH NO FINITE PRIME TABLE NEEDED
+Combining (3), (5), and (1),
+    r >= 1/(252*4^77),
+    N+1 < 126*4^77.
+The latter integer constant is
+    2877331348495215120213504514410182194947617193984.
+Thus the target cannot be cofinal even if the nominal X contains arbitrarily
+many padded zeros and the integer coefficients themselves are unbounded.
+
+7. CONSEQUENCE FOR GammaBinetSuccessor
+The structure requires preservation of checker acceptance and
+    target(next(w))=target(w)+1.
+Starting from any accepted seed, iteration k times gives accepted packets
+with target=target(seed)+k. Taking k=126*4^77 contradicts the preceding
+universal bound. Therefore:
+    existence of an accepted seed implies NOT Nonempty GammaBinetSuccessor.
+The supplied target-622 seed is one such seed once its check equality is
+kernel-proved. This deduction uses no GammaBinetBoundsSound hypothesis.
+
+8. OPTIONAL SHARPENING USING EXACT FINITE PRIME PRODUCTS
+The seven beta values satisfy beta_(m+1)<=4*beta_m for m=1,...,6.
+For L>=1, therefore beta_m/4^(Lm) decreases as m runs from 1 to 7.
+This improves (2) to
+    r >= P_L/(12*4^(7L)),
+and any accepted packet must satisfy
+    N+1 < 6*4^(7L)/P_L.                        (6)
+Exact computations below verify that the lower bound on r exceeds 1/2 for
+L=8,9,10,11 as well. Together with the analytic-free elementary argument
+for L>=12, this gives L<=7 for every accepted packet.
+Among L=1,...,7, exact rational comparison shows that the largest right-hand
+side of (6) occurs at L=4 and equals
+    432345564227567616/143.
+Thus the sharpened necessary bound is
+    N+1 < 432345564227567616/143,
+or, for natural N,
+    N <= 3023395554038933.
+This is a safe bound, not a claim that this maximum is attainable or optimal.
+The actual other coefficients and other arithmetic clauses may substantially
+improve it.
+
+FINITE ARITHMETIC METHOD
+Primes in each strict interval were enumerated by exact trial division
+through the integer square root. Products and rational comparisons used
+Python integers and fractions.Fraction; no floating-point decisions were
+used. These computations have NOT been replayed as Lean proofs.
+
+L=1
+prime_count=0
+primes=[]
+P_L=1
+radius_lower_at_minimum_order=1/196608
+target_plus_one_strict_upper=98304
+radius_lower_exceeds_one_half=False
+
+L=2
+prime_count=1
+primes=[3]
+P_L=3
+radius_lower_at_minimum_order=1/1073741824
+target_plus_one_strict_upper=536870912
+radius_lower_exceeds_one_half=False
+
+L=3
+prime_count=2
+primes=[5, 7]
+P_L=35
+radius_lower_at_minimum_order=35/52776558133248
+target_plus_one_strict_upper=26388279066624/35
+radius_lower_exceeds_one_half=False
+
+L=4
+prime_count=2
+primes=[11, 13]
+P_L=143
+radius_lower_at_minimum_order=143/864691128455135232
+target_plus_one_strict_upper=432345564227567616/143
+radius_lower_exceeds_one_half=False
+
+L=5
+prime_count=5
+primes=[17, 19, 23, 29, 31]
+P_L=6678671
+radius_lower_at_minimum_order=6678671/14167099448608935641088
+target_plus_one_strict_upper=7083549724304467820544/6678671
+radius_lower_exceeds_one_half=False
+
+L=6
+prime_count=7
+primes=[37, 41, 43, 47, 53, 59, 61]
+P_L=584803025179
+radius_lower_at_minimum_order=584803025179/232113757366008801543585792
+target_plus_one_strict_upper=116056878683004400771792896/584803025179
+radius_lower_exceeds_one_half=False
+
+L=7
+prime_count=13
+primes=[67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127]
+P_L=34227405074603836560875299
+radius_lower_at_minimum_order=34227405074603836560875299/3802951800684688204490109616128
+target_plus_one_strict_upper=1901475900342344102245054808064/34227405074603836560875299
+radius_lower_exceeds_one_half=False
+
+L=8
+prime_count=23
+primes=[131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251]
+P_L=16008643688606125328574585946049488062084747136988251
+radius_lower_at_minimum_order=16008643688606125328574585946049488062084747136988251/62307562302417931542365955950641152
+target_plus_one_strict_upper=31153781151208965771182977975320576/16008643688606125328574585946049488062084747136988251
+radius_lower_exceeds_one_half=True
+
+L=9
+prime_count=43
+primes=[257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509]
+P_L=497369008478585535856296246658391242478488212329477774761792556414828431057586895468763959997722781406315137061
+radius_lower_at_minimum_order=497369008478585535856296246658391242478488212329477774761792556414828431057586895468763959997722781406315137061/1020847100762815390390123822295304634368
+target_plus_one_strict_upper=510423550381407695195061911147652317184/497369008478585535856296246658391242478488212329477774761792556414828431057586895468763959997722781406315137061
+radius_lower_exceeds_one_half=True
+
+L=10
+prime_count=75
+primes=[521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997, 1009, 1013, 1019, 1021]
+P_L=651748888218918768138775386069488757462499934931715933549413895274176824461580401887469698028774214876703244977625212316002243818164721233709648450513565892001697567194108472127368308739741120330277334188850241749751
+radius_lower_at_minimum_order=651748888218918768138775386069488757462499934931715933549413895274176824461580401887469698028774214876703244977625212316002243818164721233709648450513565892001697567194108472127368308739741120330277334188850241749751/16725558898897967356151788704486271129485312
+target_plus_one_strict_upper=8362779449448983678075894352243135564742656/651748888218918768138775386069488757462499934931715933549413895274176824461580401887469698028774214876703244977625212316002243818164721233709648450513565892001697567194108472127368308739741120330277334188850241749751
+radius_lower_exceeds_one_half=True
+
+L=11
+prime_count=137
+primes=[1031, 1033, 1039, 1049, 1051, 1061, 1063, 1069, 1087, 1091, 1093, 1097, 1103, 1109, 1117, 1123, 1129, 1151, 1153, 1163, 1171, 1181, 1187, 1193, 1201, 1213, 1217, 1223, 1229, 1231, 1237, 1249, 1259, 1277, 1279, 1283, 1289, 1291, 1297, 1301, 1303, 1307, 1319, 1321, 1327, 1361, 1367, 1373, 1381, 1399, 1409, 1423, 1427, 1429, 1433, 1439, 1447, 1451, 1453, 1459, 1471, 1481, 1483, 1487, 1489, 1493, 1499, 1511, 1523, 1531, 1543, 1549, 1553, 1559, 1567, 1571, 1579, 1583, 1597, 1601, 1607, 1609, 1613, 1619, 1621, 1627, 1637, 1657, 1663, 1667, 1669, 1693, 1697, 1699, 1709, 1721, 1723, 1733, 1741, 1747, 1753, 1759, 1777, 1783, 1787, 1789, 1801, 1811, 1823, 1831, 1847, 1861, 1867, 1871, 1873, 1877, 1879, 1889, 1901, 1907, 1913, 1931, 1933, 1949, 1951, 1973, 1979, 1987, 1993, 1997, 1999, 2003, 2011, 2017, 2027, 2029, 2039]
+P_L=946389438864774746063874701210836584487405281348967891199697177958094536203887534423763336049737316740830893326361524232964283232051481452378051560579550405380895543930481422901786991497817933641214144689928001592589163838721553068165780395277473406743610425903422373245406580835061342309330956875688441731453955368992458894750850522845996032430802529754526838851784872705270407443560985318399424198224787533486146511440224973756588023
+radius_lower_at_minimum_order=946389438864774746063874701210836584487405281348967891199697177958094536203887534423763336049737316740830893326361524232964283232051481452378051560579550405380895543930481422901786991497817933641214144689928001592589163838721553068165780395277473406743610425903422373245406580835061342309330956875688441731453955368992458894750850522845996032430802529754526838851784872705270407443560985318399424198224787533486146511440224973756588023/274031556999544297163190906134303066185487351808
+target_plus_one_strict_upper=137015778499772148581595453067151533092743675904/946389438864774746063874701210836584487405281348967891199697177958094536203887534423763336049737316740830893326361524232964283232051481452378051560579550405380895543930481422901786991497817933641214144689928001592589163838721553068165780395277473406743610425903422373245406580835061342309330956875688441731453955368992458894750850522845996032430802529754526838851784872705270407443560985318399424198224787533486146511440224973756588023
+radius_lower_exceeds_one_half=True
+
+SCOPE OF THE RESULT
+This proves an obstruction to this particular checker and successor contract.
+It does not show that gamma is rational, does not disprove gamma irrationality,
+and does not rule out another representation, an uncapped correction order,
+or a different cancellation-aware analytic remainder bound. Removing p<=6
+would remove an assumption of this obstruction; it would not itself supply a
+successor or prove irrationality.
+
+NOT YET LEAN FORMALIZED.

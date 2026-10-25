@@ -1,0 +1,10 @@
+GammaAdmission.binetEngine (bridge : GammaAdmission.GammaBinetBoundsSound) (lock : GammaAdmission.GammaBinetSuccessor) :
+  GammaAdmission.RieszEngine GammaAdmission.gamma
+GammaAdmission.Target622.admitted_seed : ∃ w, GammaAdmission.checkBinet w = true
+GammaAdmission.GAMMA_TARGET622_DIRECT_ENDPOINT (bridge : GammaAdmission.GammaBinetBoundsSound)
+  (lock : GammaAdmission.GammaBinetSuccessor) : Irrational Real.eulerMascheroniConstant
+GammaAdmission.GAMMA_TARGET622_ENDPOINT (bridge : GammaAdmission.GammaBinetBoundsSound)
+  (lock : GammaAdmission.GammaBinetSuccessor) : Irrational Real.eulerMascheroniConstant
+'GammaAdmission.binetEngine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'GammaAdmission.GAMMA_TARGET622_DIRECT_ENDPOINT' depends on axioms: [propext, Classical.choice, Quot.sound]
+'GammaAdmission.GAMMA_TARGET622_ENDPOINT' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,35 @@
+{
+  "schema": "gamma-lean-incremental-validation-v1",
+  "compiler": {
+    "version": "4.33.0",
+    "platform": "Linux x86_64",
+    "threads": 2,
+    "wrapper": "[historical local path omitted]"
+  },
+  "dependency_validation": "Reused checked source and .olean files copied from endpoint622_validation. Only Closure622.lean was newly compiled in this incremental run.",
+  "modules": [
+    {
+      "source": "Closure622.lean",
+      "sha256": "099201199fdefa677ae58cfb80c9ad47cb6359b051a1b0cc6bd153febf55f843",
+      "exit_code": 0,
+      "log": "logs/Closure622.log"
+    }
+  ],
+  "verified_theorems": [
+    "GammaAdmission.weighted_fold_lower",
+    "GammaAdmission.binetBeta_lower",
+    "GammaAdmission.valid_radius_lt_cutoff",
+    "GammaAdmission.arithmetic_radius_lower",
+    "GammaAdmission.valid_target_bound"
+  ],
+  "axiom_audit": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "analytic_bridge_required": false,
+  "global_successor_required": false,
+  "full_checker_no_successor_theorem_proved": false,
+  "unconditional_gamma_irrationality_proved": false,
+  "publication_note": "Only the compiler.wrapper path was redacted; no compilation was performed during repository preparation."
+}

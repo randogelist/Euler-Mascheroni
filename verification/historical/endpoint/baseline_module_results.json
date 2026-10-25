@@ -1,0 +1,52 @@
+[
+  {
+    "module": "GammaAdmission/Core.lean",
+    "returncode": 0,
+    "seconds": 20.256
+  },
+  {
+    "module": "GammaAdmission/GammaRepresentative.lean",
+    "returncode": 0,
+    "seconds": 23.849
+  },
+  {
+    "module": "GammaAdmission/Coordinates.lean",
+    "returncode": 0,
+    "seconds": 25.237
+  },
+  {
+    "module": "GammaAdmission/AcceleratedBinet.lean",
+    "returncode": 0,
+    "seconds": 25.523
+  },
+  {
+    "module": "GammaAdmission/AcceleratedAdmission.lean",
+    "returncode": 0,
+    "seconds": 25.1
+  },
+  {
+    "module": "GammaAdmission/SamplesAccelerated.lean",
+    "returncode": 0,
+    "seconds": 24.88
+  },
+  {
+    "module": "GammaAdmission/MainAccelerated.lean",
+    "returncode": 0,
+    "seconds": 24.115
+  },
+  {
+    "module": "GammaAdmission/RunnerReplay.lean",
+    "returncode": 0,
+    "seconds": 25.451
+  },
+  {
+    "module": "GeneratedWitness.lean",
+    "returncode": 0,
+    "seconds": 27.237
+  },
+  {
+    "module": "Admission622.lean",
+    "returncode": 0,
+    "seconds": 25.29
+  }
+]

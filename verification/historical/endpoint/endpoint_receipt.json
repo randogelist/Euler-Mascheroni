@@ -1,0 +1,80 @@
+{
+  "package": "GAMMA_TARGET622_ENDPOINT_v0_2_0",
+  "lean_version": "4.33.0",
+  "platform": "x86_64-unknown-linux-gnu",
+  "validation_mode": "incremental compilation with byte-identical previously compiled dependencies",
+  "baseline_modules_compiled_previously": 10,
+  "baseline_sources": [
+    {
+      "module": "Admission622.lean",
+      "unchanged": true,
+      "sha256": "84b5253a4f421d1551957e7f76cff2d70d65f821fab6b6960bf82581c66829c2"
+    },
+    {
+      "module": "GammaAdmission/AcceleratedAdmission.lean",
+      "unchanged": true,
+      "sha256": "db39db6fa23cda9c165ae273e71d3731923714b05097e74445bcdf78e643cfac"
+    },
+    {
+      "module": "GammaAdmission/AcceleratedBinet.lean",
+      "unchanged": true,
+      "sha256": "a16d26b5dd554eaeccbe4eaf58e8ccfbb8f2f96ff00ea6abfbc92d8c9987d6c3"
+    },
+    {
+      "module": "GammaAdmission/Coordinates.lean",
+      "unchanged": true,
+      "sha256": "61a79f3a9aab41bef4394a5a8f49ffbafea2eb25176cfb82f6be1c7f335172c4"
+    },
+    {
+      "module": "GammaAdmission/Core.lean",
+      "unchanged": true,
+      "sha256": "0377249e413536258ee1f98be006b2627011d1fea6b3c8c3610a7a680c2872d8"
+    },
+    {
+      "module": "GammaAdmission/GammaRepresentative.lean",
+      "unchanged": true,
+      "sha256": "ed2b76476823a6baf76c892a491a2614b6490e97c9a9b3102424c090a1d92f61"
+    },
+    {
+      "module": "GammaAdmission/MainAccelerated.lean",
+      "unchanged": true,
+      "sha256": "49a13cdbcd6569d898163b0a5bc50a4648de033de13c6f95ceb63ce766dc5543"
+    },
+    {
+      "module": "GammaAdmission/RunnerReplay.lean",
+      "unchanged": true,
+      "sha256": "dbd6cbe2545470c2092b2e3cd64539f85be21070b45ab85149238eec8178662d"
+    },
+    {
+      "module": "GammaAdmission/SamplesAccelerated.lean",
+      "unchanged": true,
+      "sha256": "cd158fe7f53560bed19807b86d01d140b256ce033d3f1a7c1b693d3f2fcf6527"
+    },
+    {
+      "module": "GeneratedWitness.lean",
+      "unchanged": true,
+      "sha256": "7b3717ca08a65247e25ae619c4e24ad0c60a31608e03e2d6677f914114e8c4e0"
+    }
+  ],
+  "new_modules_compiled": [
+    "GammaAdmission/GeneralEndpoint.lean",
+    "Endpoint622.lean"
+  ],
+  "new_module_exit_codes": [
+    0,
+    0
+  ],
+  "conditional_endpoint": "PASS",
+  "generic_engine_attachment": "PASS",
+  "remaining_explicit_inputs": [
+    "GammaBinetBoundsSound",
+    "GammaBinetSuccessor"
+  ],
+  "new_theorem_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "native_windows_endpoint_replay": "USER_RUN_PENDING",
+  "unconditional_gamma_irrationality": "NOT_PROVED"
+}

@@ -1,0 +1,5 @@
+'GammaAdmission.binetBeta_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'GammaAdmission.valid_radius_lt_cutoff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'GammaAdmission.weighted_fold_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'GammaAdmission.arithmetic_radius_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'GammaAdmission.valid_target_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
